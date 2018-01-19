@@ -12,6 +12,8 @@ use App\Task;
 |
 */
 
+//THESE ARE THE GENERAL ROUTES
+
 Route::get('/', 'PostController@index');
 
 Route::get('/posts/create','PostController@create');
