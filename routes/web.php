@@ -12,7 +12,7 @@ use App\Task;
 |
 */
 
-Route::get('/', 'PostController@index');
+Route::get('/', 'PostController@index')->name('home');
 
 Route::get('/posts/create','PostController@create');
 
@@ -22,41 +22,50 @@ Route::post('/posts','PostController@store');
 
 Route::post('/posts/{post}/comment','CommentsController@store');
 
-Route::get('/csstry',function(){
-	return view('csstry');
-});
+Route::get('/login','loginController@create')->name('login');
 
-Route::get('/welcome',function(){
-	return view('welcome');
-});
+Route::post('/login','loginController@store');
 
-Route::get('/try',function(){
-	$tasks = [
-		'name' => 'Shahel',
-		'place' => 'Balaju',
-		'DOB' => '2051-10-25'
-	];
-	// $name = "Shahel";
-	// $add = "Balaju";
-	// $phone = "4880334";
-	$tasks = [
-		"name" => "Shahel",
-		"add" => "Balaju",
-		"phone" => "4880334"
-	];
-	$result = compact('tasks');
-	print_r($result);
-});
+Route::get('/logout','loginController@logout');
 
-Route::get('/tasks/{id}','TasksController@show');
+Route::get('/register','registerController@create');
 
-Route::get('/tasks','TasksController@index');
+Route::post('/register','registerController@store');
 
-Route::get('/blogs',function(){
-	return view('blogs.master');
-});
 
-// REST URL CONVENTIONS
+//EXPERIMENTAL ROUTES WHILE LEARNING---------------------------------------------------------------------------------
+
+// Route::get('/try',function(){
+// 	$tasks = [
+// 		'name' => 'Shahel',
+// 		'place' => 'Balaju',
+// 		'DOB' => '2051-10-25'
+// 	];
+// 	// $name = "Shahel";
+// 	// $add = "Balaju";
+// 	// $phone = "4880334";
+// 	$tasks = [
+// 		"name" => "Shahel",
+// 		"add" => "Balaju",
+// 		"phone" => "4880334"
+// 	];
+// 	$result = compact('tasks');
+// 	print_r($result);
+// });
+
+// Route::get('/tasks/{id}','TasksController@show');
+
+// Route::get('/tasks','TasksController@index');
+
+// Route::get('/blogs',function(){
+// 	return view('blogs.master');
+// });
+
+//END OF EXPERIMENTAL ROUTES-------------------------------------------------------------------------------------
+
+
+
+// REST URL CONVENTIONS------------------------------------------------------------------------------------------
 
 // posts
 

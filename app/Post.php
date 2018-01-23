@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Comment;
+
 use Illuminate\Database\Eloquent\Model;
 
 use Carbon\Carbon;
@@ -26,7 +28,20 @@ class Post extends Model
     	return $this->hasMany('App\Comment');
     }
 
-    public function addComment($body){
-    	return $this->comments()->create(['body' => $body]);
+    public function user(){
+        return $this->belongsTo('App\User');
     }
+
+    //INTERACTION WITH OTHER ENTITIES
+
+    public function addComment($body){
+        //return $this->comments()->create(['body' => $body]);
+        $comment = new Comment;
+        $comment->body = $body;
+        $comment->user_id = auth()->user()->id;
+        $comment->post_id = $this->id;
+        $comment->save();
+    
+    }
+
 }

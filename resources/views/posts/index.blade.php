@@ -10,7 +10,7 @@
 
         <!-- Date/Time -->
 
-        <p>Posted on {{$post->formatted_date()}}</p>
+        <p><strong>{{$post->user->name}}</strong> posted on {{$post->formatted_date()}}</p>
 
         <hr>
 

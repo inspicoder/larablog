@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use App\Comment;
+
 class CommentsController extends Controller
 {
     //
+    public function __construct(){
+        $this->middleware('auth');//authenticate bhayo bhane matra pass hune
+    }
+
     public function store(Post $post){
     	$this->validate(request(),
     		[
@@ -20,7 +26,10 @@ class CommentsController extends Controller
     	// $comment->post_id = $id;
     	// $comment->save();
     	//return back(); 
-    	$post->addComment(request('body'));
+    	//$post->addComment(request('body'));
+
+        $post->addComment(request('body'));
+
     	return back();
     }
 }

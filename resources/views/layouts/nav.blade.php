@@ -21,6 +21,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
             </li>
+
+            <!-- USER LOGIN STATUS -->
+            @if(auth()->check())
+            <li class="nav-item">
+              <a class="nav-link" href="#">{{auth()->user()->name}}</a>s
+            </li>
+            @endif
+
           </ul>
         </div>
       </div>

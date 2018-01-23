@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Post;
+use App\Comment;
 
 class User extends Authenticatable
 {
@@ -26,4 +28,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //RELATION WITH OTHER MODELS
+
+    public function post(){
+        return $this->hasMany('App\Post');
+    }
+
+    public function comment(){
+        return $this->hasMany('App\Comment');
+    }
+
+    //INTERACTION WITH OTHER ENTITIES i.e MODELS
+
+    public function publish(Post $post){
+        $this->post()->save($post); //use save() method when you already have object whereas use create to pass array and create like we did with post
+    }
+
+
 }
