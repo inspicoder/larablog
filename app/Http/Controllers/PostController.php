@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Post;
 
+use App\Repositories\Posts;
+
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -12,16 +14,45 @@ class PostController extends Controller
 {
     //
     public function __construct(){
+        
         $this->middleware('auth')->except(['index','show']); //This middleware doesn't let controllers except index and show pass through if the user is not authenticated(redirects to login route)
+        
+        // $archives = Post::selectRaw('year(created_at) as y, monthname(created_at) as m, count(id) as published')
+        // ->groupBy('y','m')
+        // ->orderByRaw('created_at DESC')
+        // ->get();
+        
     }
 
-    public function index(){
-    	//$posts = Post::all();
-    	$posts = Post::orderBy('created_at','desc')->get();
+    public function index(Posts $post){
+
+        // $posts = new Post;
+
+        // if(request('month')){
+        //     $month = request('month');
+        //     $posts = $posts->whereRaw("month(created_at) = '$month'");
+        // }
+
+        // if(request('year')){
+        //     $year = request('year');
+        //     $posts = $posts->whereRaw("year(created_at) = '$year'");
+        // }
+
+        // $posts = $posts->orderByRaw("created_at DESC")->get();
+
+        $posts = $post->all();
+
+        // $p = new Post;
+        // $archives = Post::archives();
+
     	return view('posts.index',compact('posts'));
     }
 
     public function show(Post $id){
+
+        // $p = new Post;
+        // $archives = $p->archives();
+
     	return view('posts.show',compact('id'));
     }
 

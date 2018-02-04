@@ -21,6 +21,16 @@ class Post extends Model
     public function human_readable_date(){
     	return Carbon::instance($this->created_at)->diffForHumans();
     }
+
+    public static function archives(){
+        $archives = self::selectRaw('year(created_at) as y, month(created_at) as m, monthname(created_at) as month_name, count(id) as published')
+        ->groupBy('y','m', 'month_name')
+        ->orderByRaw('created_at DESC')
+        ->get();
+
+        return $archives;
+
+    }
     
     //RELATIONSHIPS WITH OTHER MODELS
 

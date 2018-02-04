@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\Schema;
 
+use App\Post;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +18,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        
+        //VIEW COMPOSERS
+
+        view()->composer('layouts.sidebar',function($view){
+            $view->with('archives',Post::archives());
+
+        });
 
     }
 

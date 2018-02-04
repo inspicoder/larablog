@@ -1,0 +1,4 @@
+SELECT created_at,COUNT(id) as entries FROM posts GROUP BY month(created_at),year(created_at) ORDER BY created_at DESC;
+
+
+App\Post::selectRaw('year(created_at) as y, month(created_at) as m, count(id) as published')->groupBy('y','m')->orderByRaw('created_at DESC')->get()

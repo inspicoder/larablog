@@ -1,0 +1,4 @@
+(while running windows application in unix environment)whenever you run mysql add mysql to your environment path and use winpty mysql instead of just mysql
+you can do this by this command:
+alias mysql="winpty mysql"
+in git bash
